@@ -1,9 +1,3 @@
-/*
- * gpio.c
- *
- *  Created on: 2018-6-4
- *      Author: Landers Ƥ
- */
 #include "xparameters.h"
 #include"xintc.h"
 #include"xil_io.h"
