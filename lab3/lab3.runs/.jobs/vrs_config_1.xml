@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Runs Version="1" Minor="0">
+	<Run Id="system_processing_system7_0_0_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_processing_system7_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="system_rst_ps7_0_100M_0_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_rst_ps7_0_100M_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="system_xbar_0_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_xbar_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="system_led_ip_0_0_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_led_ip_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="system_axi_bram_ctrl_0_0_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_axi_bram_ctrl_0_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="system_axi_bram_ctrl_0_bram_0_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_axi_bram_ctrl_0_bram_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="system_auto_pc_2_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_auto_pc_2_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+	<Run Id="system_auto_pc_1_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_auto_pc_1_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado" IsOrderedIPRun="true">
+		<Parent Id="system_auto_pc_2_synth_1"/>
+	</Run>
+	<Run Id="system_auto_pc_0_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_auto_pc_0_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado" IsOrderedIPRun="true">
+		<Parent Id="system_auto_pc_2_synth_1"/>
+	</Run>
+	<Run Id="system_auto_pc_3_synth_1" LaunchDir="D:/xilinxwrk/lab3/lab3.runs/system_auto_pc_3_synth_1" FlowId="Vivado_Synthesis" FromStepId="vivado" ToStepId="vivado"/>
+</Runs>
+
