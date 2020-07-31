@@ -1,0 +1,52 @@
+#include "xparameters.h"
+#include "xtmrctr.h"
+#include "xintc.h"
+#include "xil_exception.h"
+#define TMRCTR_DEVICE_ID   XPAR_TMRCTR_0_DEVICE_ID
+#define TMRCTR_INTERRUPT_ID  XPAR_INTC_0_TMRCTR_0_VEC_ID
+#define INTC_DEVICE_ID    XPAR_INTC_0_DEVICE_ID
+#define TIMER_CNTR_0  0
+#define RESET_VALUE  0X5F5E100
+void TimerCounterHandler(void *CallBackRef, u8 TmrCtrNumber);
+XIntc  InterruptController;
+XTmrCtr TimerCounterInst;
+u8 seg_7;
+
+int main(void) {
+	int Status;
+	seg_7 = 0x7f;
+	int i=0;
+	Xil_Out8(0x40000004,0x0);
+	Xil_Out8(0x4000000c,0x0);
+	Status = XTmrCtr_Initialize(&TimerCounterInst, TMRCTR_DEVICE_ID);
+	XIntc_Initialize(&InterruptController, INTC_DEVICE_ID);
+	XIntc_Connect(&InterruptController,INTC_DEVICE_ID,
+			(XInterruptHandler)XTmrCtr_InterruptHandler,
+			(void *)&TimerCounterInst);//注册中断服务程序
+	XIntc_Start(&InterruptController, XIN_REAL_MODE);
+	XIntc_Enable(&InterruptController, TMRCTR_INTERRUPT_ID);
+	microblaze_register_handler((XInterruptHandler)XIntc_InterruptHandler,
+			&InterruptController);//
+	microblaze_enable_interrupts();
+	XTmrCtr_SetHandler(&TimerCounterInst, TimerCounterHandler, &TimerCounterInst);//注册定时器中断服务程序
+	XTmrCtr_SetOptions(&TimerCounterInst, TIMER_CNTR_0,
+			XTC_INT_MODE_OPTION | XTC_AUTO_RELOAD_OPTION | XTC_DOWN_COUNT_OPTION);
+	XTmrCtr_SetResetValue(&TimerCounterInst, TIMER_CNTR_0, RESET_VALUE);
+	XTmrCtr_Start(&TimerCounterInst, TIMER_CNTR_0);
+	while(1);
+	return XST_SUCCESS;
+
+}
+
+void TimerCounterHandler(void *CallBackRef, u8 TmrCtrNumber) {
+	Xil_Out8(0x40000000, seg_7 );
+	Xil_Out8(0x40000008,0xf9);
+	seg_7=seg_7>>1;
+	seg_7=seg_7+0x80;
+	int i=0;
+	i++;
+    if(i==8|seg_7==0xff){
+    seg_7=0x7f;
+    i=0;
+      }
+}
